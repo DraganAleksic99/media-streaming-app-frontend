@@ -48,7 +48,7 @@ export default function Navigation() {
                 <Button
                   color="inherit"
                   onClick={() => {
-                    auth.clearJWT(navigate('/'))
+                    auth.clearJWT(() => navigate('/'))
                   }}
                 >
                   Sign out
