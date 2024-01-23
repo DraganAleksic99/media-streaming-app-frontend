@@ -4,6 +4,8 @@ import Signup from './Signup'
 import Home from './Home'
 import Profile from './views/user/Profile'
 import EditProfile from './views/user/EditProfile'
+import PrivateRoute from './auth/PrivateRoute'
+import NewMedia from './views/media/NewMedia'
 
 const MainRouter = () => {
   return (
@@ -14,6 +16,14 @@ const MainRouter = () => {
         <Route path="/signin" element={<Signin />} />
         <Route path="/user/:userId" element={<Profile />} />
         <Route path="/user/edit/:userId" element={<EditProfile />} />
+        <Route
+          path="/media/new"
+          element={
+            <PrivateRoute>
+              <NewMedia />
+            </PrivateRoute>
+          }
+        />
       </Route>
     </Routes>
   )
