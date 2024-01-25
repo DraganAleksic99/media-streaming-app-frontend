@@ -16,6 +16,8 @@ import { Navigate, Link, useMatch } from 'react-router-dom'
 import DeleteUser from './DeleteUser'
 import auth from '../../auth/authHelper'
 import { read } from '../../services/userService'
+import { listByUser } from '../../services/mediaService'
+import MediaList from '../media/MediaList'
 
 type TUser = {
   _id: string
@@ -31,8 +33,10 @@ const baseUrl = 'http://localhost:3500'
 export default function Profile() {
   const match = useMatch('/user/:userId')
   const userId = match.params.userId
+
   const [user, setUser] = useState<TUser | Record<string, never>>({})
   const [redirectToSignin, setRedirectToSignin] = useState(false)
+  const [media, setMedia] = useState([])
 
   useEffect(() => {
     const jwt = auth.isAuthenticated()
@@ -57,6 +61,18 @@ export default function Profile() {
     //   abortController.abort()
     // }
   }, [userId])
+
+  useEffect(() => {
+    listByUser({
+      userId: match.params.userId
+    }).then(data => {
+      if (data && data.error) {
+        setRedirectToSignin(true)
+      } else {
+        setMedia(data)
+      }
+    })
+  }, [match.params.userId])
 
   if (redirectToSignin) {
     return <Navigate to="/signin" />
@@ -90,6 +106,9 @@ export default function Profile() {
         <Divider />
         <ListItem>
           <ListItemText primary={'Joined: ' + new Date(user.created).toDateString()} />
+        </ListItem>
+        <ListItem>
+          <MediaList media={media} />
         </ListItem>
       </List>
     </Paper>

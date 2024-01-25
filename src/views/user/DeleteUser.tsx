@@ -13,7 +13,7 @@ import auth from '../../auth/authHelper'
 import { remove } from '../../services/userService'
 import { Navigate } from 'react-router-dom'
 
-export default function DeleteUser(props) {
+export default function DeleteUser({ userId }: { userId: string }) {
   const [open, setOpen] = useState(false)
   const [redirect, setRedirect] = useState(false)
 
@@ -24,7 +24,7 @@ export default function DeleteUser(props) {
   const deleteAccount = () => {
     remove(
       {
-        userId: props.userId
+        userId: userId
       },
       { t: jwt.token }
     ).then(data => {

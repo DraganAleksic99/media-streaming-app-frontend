@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useMatch, Navigate, useLocation, useNavigate } from 'react-router'
 import auth from '../../auth/authHelper'
 import { update } from '../../services/userService'
@@ -33,7 +33,7 @@ export default function EditProfile() {
     redirectToProfile: false
   })
 
-  const handleChange = name => event => {
+  const handleChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
     const value = name === 'photo' ? event.target.files[0] : event.target.value
     setValues({ ...values, [name]: value })
   }
@@ -41,6 +41,7 @@ export default function EditProfile() {
   const clickSubmit = () => {
     const jwt = auth.isAuthenticated()
     const userData = new FormData()
+
     values.name && userData.append('name', values.name)
     values.email && userData.append('email', values.email)
     values.password && userData.append('password', values.password)
