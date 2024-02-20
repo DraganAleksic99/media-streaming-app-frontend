@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3500'
+const baseUrl = 'https://media-streaming-app-backend-production.up.railway.app'
 
 const signin = async user => {
   try {

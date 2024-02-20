@@ -17,7 +17,7 @@ import { TMedia } from './MediaList'
 import DeleteMedia from './DeleteMedia'
 import MediaPlayer from './MediaPlayer'
 
-const baseUrl = 'http://localhost:3500'
+const baseUrl = 'https://media-streaming-app-backend-production.up.railway.app'
 
 type Props = {
   media: TMedia | Record<string, never>

@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import { Person as PersonIcon } from '@mui/icons-material'
 
-const baseUrl = 'http://localhost:3500'
+const baseUrl = 'https://media-streaming-app-backend-production.up.railway.app'
 
 export default function EditProfile() {
   const theme = useTheme()

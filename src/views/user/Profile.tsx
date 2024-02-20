@@ -28,7 +28,7 @@ type TUser = {
   updated: Date
 }
 
-const baseUrl = 'http://localhost:3500'
+const baseUrl = 'https://media-streaming-app-backend-production.up.railway.app'
 
 export default function Profile() {
   const match = useMatch('/user/:userId')
@@ -57,9 +57,9 @@ export default function Profile() {
       }
     })
 
-    // return function cleanup() {
-    //   abortController.abort()
-    // }
+    return function cleanup() {
+      abortController.abort()
+    }
   }, [userId])
 
   useEffect(() => {
@@ -80,7 +80,9 @@ export default function Profile() {
 
   return (
     <Paper elevation={4}>
-      <Typography variant="h6">Profile</Typography>
+      <Typography sx={{ paddingLeft: '16px', paddingTop: '8px' }} variant="h6">
+        Profile
+      </Typography>
       <List dense>
         <ListItem>
           <ListItemAvatar>
