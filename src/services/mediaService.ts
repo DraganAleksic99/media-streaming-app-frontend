@@ -1,6 +1,9 @@
-const baseUrl = 'http://localhost:3500'
+import { TMedia } from '../views/media/MediaList'
+import { TParams, TCredentials } from './userService'
 
-const create = async (params, credentials, media) => {
+const baseUrl = 'https://media-streaming-app-backend-production.up.railway.app'
+
+const create = async (params: TParams, credentials: TCredentials, media: FormData) => {
   try {
     const response = await fetch(baseUrl + '/api/media/new/' + params.userId, {
       method: 'POST',
@@ -16,4 +19,20 @@ const create = async (params, credentials, media) => {
   }
 }
 
-export { create }
+const listPopular = async (signal: AbortSignal) => {
+  try {
+    const response = await fetch(baseUrl + '/api/media/popular', {
+      method: 'GET',
+      signal: signal,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    return await response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, listPopular }
