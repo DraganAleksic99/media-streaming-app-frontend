@@ -62,4 +62,25 @@ const read = async (params: { mediaId: string }, signal: AbortSignal) => {
   }
 }
 
-export { create, listPopular, listByUser, read }
+const update = async (
+  params: { mediaId: string },
+  credentials: TCredentials,
+  media: TMedia | Record<string, never>
+) => {
+  try {
+    const response = await fetch(baseUrl + '/api/media/' + params.mediaId, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + credentials.t
+      },
+      body: JSON.stringify(media)
+    })
+    return await response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, listPopular, listByUser, read, update }
