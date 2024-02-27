@@ -35,4 +35,31 @@ const listPopular = async (signal: AbortSignal) => {
   }
 }
 
-export { create, listPopular }
+const listByUser = async (params: TParams) => {
+  try {
+    const response = await fetch(baseUrl + '/api/media/by/' + params.userId, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    return await response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const read = async (params: { mediaId: string }, signal: AbortSignal) => {
+  try {
+    const response = await fetch(baseUrl + '/api/media/' + params.mediaId, {
+      method: 'GET',
+      signal: signal
+    })
+    return await response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, listPopular, listByUser, read }
