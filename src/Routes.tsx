@@ -6,6 +6,8 @@ import Profile from './views/user/Profile'
 import EditProfile from './views/user/EditProfile'
 import PrivateRoute from './auth/PrivateRoute'
 import NewMedia from './views/media/NewMedia'
+import EditMedia from './views/media/EditMedia'
+import PlayMedia from './views/media/PlayMedia'
 
 const MainRouter = () => {
   return (
@@ -24,6 +26,15 @@ const MainRouter = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/media/edit/:mediaId"
+          element={
+            <PrivateRoute>
+              <EditMedia />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/media/:mediaId" element={<PlayMedia />} />
       </Route>
     </Routes>
   )

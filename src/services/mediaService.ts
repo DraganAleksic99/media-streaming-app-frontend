@@ -83,4 +83,20 @@ const update = async (
   }
 }
 
-export { create, listPopular, listByUser, read, update }
+const remove = async (params: { mediaId: string }, credentials: TCredentials) => {
+  try {
+    const response = await fetch(baseUrl + '/api/media/' + params.mediaId, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + credentials.t
+      }
+    })
+    return await response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, listPopular, listByUser, read, update, remove }
