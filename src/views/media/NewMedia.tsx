@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import auth from '../../auth/authHelper'
 import { Card, CardActions, CardContent, Button, TextField, Typography, Icon } from '@mui/material'
 import { FileUpload } from '@mui/icons-material'
@@ -40,7 +40,7 @@ export default function NewMedia() {
     })
   }
 
-  const handleChange = name => event => {
+  const handleChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
     const value = name === 'video' ? event.target.files[0] : event.target.value
     setValues({ ...values, [name]: value })
   }
@@ -48,6 +48,7 @@ export default function NewMedia() {
   if (values.redirect) {
     return <Navigate to={'/media/' + values.mediaId} />
   }
+
   return (
     <Card>
       <CardContent>

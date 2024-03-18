@@ -1,20 +1,20 @@
 const baseUrl = 'https://media-streaming-app-backend-production.up.railway.app'
 
-export type Params = {
+export type TParams = {
   userId: string
 }
 
-export type Credentials = {
+export type TCredentials = {
   t: string
 }
 
-type User = {
+type TUser = {
   name: string
   email: string
   password: string
 }
 
-const create = async (user: User) => {
+const create = async (user: TUser) => {
   try {
     const response = await fetch(baseUrl + '/api/users/', {
       method: 'POST',
@@ -42,7 +42,7 @@ const list = async (signal: AbortSignal) => {
   }
 }
 
-const read = async (params: Params, credentials: Credentials, signal: AbortSignal) => {
+const read = async (params: TParams, credentials: TCredentials, signal: AbortSignal) => {
   try {
     const response = await fetch(baseUrl + '/api/users/' + params.userId, {
       method: 'GET',
@@ -59,7 +59,7 @@ const read = async (params: Params, credentials: Credentials, signal: AbortSigna
   }
 }
 
-const update = async (params: Params, credentials: Credentials, user: FormData) => {
+const update = async (params: TParams, credentials: TCredentials, user: FormData) => {
   try {
     const response = await fetch(baseUrl + '/api/users/' + params.userId, {
       method: 'PUT',
@@ -75,7 +75,7 @@ const update = async (params: Params, credentials: Credentials, user: FormData) 
   }
 }
 
-const remove = async (params: Params, credentials: Credentials) => {
+const remove = async (params: TParams, credentials: TCredentials) => {
   try {
     const response = await fetch(baseUrl + '/api/users/' + params.userId, {
       method: 'DELETE',
